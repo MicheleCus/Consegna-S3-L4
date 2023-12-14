@@ -58,5 +58,12 @@ nella seconda riga viene associato l'IP alla porta specificata e nella terza rig
 La quarta riga accetta la connessione in entrata specificando l'indirizzo e la porta del client.
 L'ultima riga stampa un messaggio per la corretta connessione.
 
+while 1:
+    try:
+        data = connection.recv(1024)
+    except:continue
+
+
+
 
 
