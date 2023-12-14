@@ -63,6 +63,24 @@ while 1:
         data = connection.recv(1024)
     except:continue
 
+Qui il codice inizia un ciclo while continuo per ricevere dati dal client.
+
+if(data.decode('utf-8') == '1'):
+        tosend = platform.platform() + " " + platform.machine()
+        connection.sendall(tosend.encode())
+    elif(data.decode('utf-8') == '2'):
+        data = connection.recv(1024)
+        try:
+            filelist = os.listdir(data.decode('utf-8'))
+            tosend = ""
+            for x in filelist:
+                tosend += "," + x
+        except:
+            tosend = "Wrong path"
+        connection.sendall(tosend.encode())
+    elif(data.decode('utf-8') == '0'):
+        connection.close()
+        connection, address = s.accept()
 
 
 
