@@ -85,6 +85,7 @@ if(data.decode('utf-8') == '1'):
 Il programma è scritto per svolgere delle funzioni specifiche in base alla risposta che il server riceve dal client.
 Se il server riceve "1" invia al client i dati relativi alla macchina e la piattaforma.
 Se il server riceve "2" come risposta il programma memorizza il percorso di una directory e la lista dei file all'interno della macchina.
+Se avviene un errore verrà restituito "Wrong path".
 Se il server riceve "0" come risposta chiude la connessione e accetta una nuova connessione. 
 
 
